@@ -1,0 +1,28 @@
+name: sada
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - cudatoolkit=11.8
+  - pytorch=2.0.1 
+  - torchvision=0.15.2
+  - pip
+  - pip:
+    - absl-py==2.1.0
+    - dm-control==1.0.16
+    - termcolor==2.4.0
+    - hydra-core==1.1.1
+    - hydra-submitit-launcher==1.2.0
+    - omegaconf==2.1.2
+    - xmltodict==0.13.0
+    - opencv-python==4.9.0.80
+    - tb-nightly==2.16.0a20240209
+    - pandas==2.2.0
+    - pillow==10.2.0
+    - moviepy==1.0.3
+    - imageio==2.33.1
+    - imageio-ffmpeg==0.4.9
+    - wandb==0.16.3

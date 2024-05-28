@@ -1,0 +1,89 @@
+defaults:
+  - _self_
+  - override hydra/launcher: submitit_local
+  - override hydra/job_logging: disabled
+
+# environment
+task: ??? 
+
+# train settings
+frame_stack: 3
+action_repeat: 2 
+discount: 0.99
+num_seed_frames: 4000 
+batch_size: 256 
+seed: 1
+device: cuda
+num_train_frames: 1000000
+
+# replay buffer
+replay_buffer_size: 1000000
+replay_buffer_num_workers: 4
+nstep: 1 
+
+# for overlay augmentation, and distracting control suite evaluation (places365 and davis datasets)
+datasets: ['datasets', '/root/datasets']
+
+# evaluate train env while training
+eval_every_frames: 20000 
+eval_modes: ['color_hard', 'rotate_hard'] 
+num_eval_episodes: 10
+
+# Supported eval_modes: [], 'color_easy', 'color_hard', 'video_easy', 'video_hard', 'color_video_easy', 'color_video_hard', 
+# 'rotate_easy', 'rotate_hard', 'shift_easy', 'shift_hard', 'rotate_shift_easy', 'rotate_shift_hard' 
+#  ... multiple envs simulatenously supported e.g. ['color_hard','video_hard','rotate_hard']
+
+# saving videos from evaluation while training
+save_video: false
+save_final_video_once: true 
+video_dir: 'logs/video'
+
+# generalization testing at the end
+save_test_video: true
+test_modes: ['dmcgb_photo', 'dmcgb_geo', 'dcs'] # Options: 'dmcgb_photo', 'dmcgb_geo', 'dcs' e.g. ['dmcgb_photo','dmcgb_geo']
+num_test_episodes: 100
+
+# snapshot and csv
+save_snapshot: false
+save_csv: true
+
+# Wandb
+use_wandb: false
+wandb_project: ??? 
+wandb_entity: ???
+exp_name: default
+wandb_silent: false
+
+# agent
+agent: sada
+lr: 5e-4
+feature_dim: 50
+strong_augs: ['all'] 
+
+# Supported strong_augs: [], 'conv', 'overlay', 'conv_overlay', 'rotate', 'shift', 'rotate_shift',
+# 'photo' (shorthand for ['conv','overlay','conv_overlay']), 'geo' (shorthand for ['rotate','shift','rotate_shift']), 
+# 'all' (shorthand for all 6 augs)
+#  ... multiple strong augs simulatenously supported e.g. ['conv','rotate','shift']
+
+agent_cfg:
+  _target_: algos.${agent}.AGENT
+  obs_shape: ??? # to be specified later
+  action_shape: ??? # to be specified later
+  device: ${device}
+  lr: ${lr}
+  critic_target_tau: 0.01
+  update_every_steps: 2
+  num_expl_steps: 2000 
+  hidden_dim: 1024
+  feature_dim: ${feature_dim}
+  init_temperature: 0.1
+  log_std_bounds: [-10,2]
+  strong_augs: ${strong_augs} 
+
+
+
+# hydra
+hydra:
+  run:
+    dir: .
+  output_subdir: null

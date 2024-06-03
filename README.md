@@ -6,7 +6,7 @@ This is the official Pytorch implementation of
 
 [A Recipe for Unbounded Data Augmentation in Visual Reinforcement Learning](https://aalmuzairee.github.io/SADA/) by
 
-[Abdulaziz Almuzairee](https://aalmuzairee.github.io), [Nicklas Hansen](https://nicklashansen.com), [Henrik I Christensen](https://hichristensen.com) (UC San Diego)</br>
+[Abdulaziz Almuzairee](https://aalmuzairee.github.io), [Nicklas Hansen](https://nicklashansen.com), [Henrik I. Christensen](https://hichristensen.com) (UC San Diego)</br>
 
 
 </br><img  width="100%" src="https://github.com/aalmuzairee/SADA/blob/master/static/videos/cinematic.gif"></br>
@@ -190,7 +190,6 @@ If you find our work useful, please consider citing our paper:
       archivePrefix={arXiv},
       primaryClass={cs.LG}
 }
-
 ```
 
 If you used DMC-GB2 in your work, please consider citing the [original DMC-GB](https://arxiv.org/abs/2011.13389) as well.

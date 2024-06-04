@@ -9,6 +9,7 @@ dependencies:
   - cudatoolkit=11.8
   - pytorch=2.0.1 
   - torchvision=0.15.2
+  - mkl=2024.0
   - pip
   - pip:
     - absl-py==2.1.0
